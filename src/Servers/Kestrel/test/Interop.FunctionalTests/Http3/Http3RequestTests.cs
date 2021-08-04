@@ -744,7 +744,7 @@ namespace Interop.FunctionalTests.Http3
                     request1.Version = HttpVersion.Version30;
                     request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                    var response1 = await client.SendAsync(request1);
+                    var response1 = await client.SendAsync(request1, CancellationToken.None);
                     response1.EnsureSuccessStatusCode();
 
                     await connectionStartedTcs.Task.DefaultTimeout();
@@ -788,7 +788,7 @@ namespace Interop.FunctionalTests.Http3
                 request1.Version = HttpVersion.Version30;
                 request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                var responseTask = client.SendAsync(request1);
+                var responseTask = client.SendAsync(request1, CancellationToken.None);
 
                 // Connection started.
                 var connection = await connectionStartedTcs.Task.DefaultTimeout();
@@ -860,7 +860,7 @@ namespace Interop.FunctionalTests.Http3
                 request1.Version = HttpVersion.Version30;
                 request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                var responseTask = client.SendAsync(request1);
+                var responseTask = client.SendAsync(request1, CancellationToken.None);
 
                 // Connection started.
                 var connection = await connectionStartedTcs.Task.DefaultTimeout();
