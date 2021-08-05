@@ -13,7 +13,7 @@ import { getNextChunk } from './StreamingInterop';
 import { RootComponentsFunctions, enableJSRootComponents, JSComponentInfoByInitializer, JSComponentInitializerCallback } from './Rendering/JSRootComponents';
 import { DotNet } from '@microsoft/dotnet-js-interop';
 
-interface IBlazor {
+export interface IBlazor {
   navigateTo: (uri: string, options: NavigationOptions) => void;
   registerCustomEventType: (eventName: string, options: EventTypeOptions) => void;
 
