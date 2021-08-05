@@ -9,12 +9,12 @@ import { shouldAutoStart } from './BootCommon';
 import { setEventDispatcher } from './Rendering/Events/EventDispatcher';
 import { WebAssemblyResourceLoader } from './Platform/WebAssemblyResourceLoader';
 import { WebAssemblyConfigLoader } from './Platform/WebAssemblyConfigLoader';
-import { BootConfigResult, BootJsonData, BootJsonDataExtension } from './Platform/BootConfig';
+import { BootConfigResult } from './Platform/BootConfig';
 import { Pointer, System_Array, System_Boolean, System_Byte, System_Int, System_Object, System_String } from './Platform/Platform';
 import { WebAssemblyStartOptions } from './Platform/WebAssemblyStartOptions';
 import { WebAssemblyComponentAttacher } from './Platform/WebAssemblyComponentAttacher';
 import { discoverComponents, discoverPersistedState, WebAssemblyComponentDescriptor } from './Services/ComponentDescriptorDiscovery';
-import { AfterBlazorStartedCallback, WebAssemblyJSInitializers } from './Platform/Initialization/WebAssemblyJSInitializers';
+import { AfterBlazorStartedCallback, JSInitializers } from './JSInitializers';
 
 declare var Module: EmscriptenModule;
 let started = false;
@@ -123,7 +123,7 @@ async function boot(options?: Partial<WebAssemblyStartOptions>): Promise<void> {
   let afterBlazorStartedCallbacks: AfterBlazorStartedCallback[] = [];
   if (bootConfigResult.bootConfig.libraryInitializers) {
     const initializerFiles = bootConfigResult.bootConfig.libraryInitializers;
-    afterBlazorStartedCallbacks = await WebAssemblyJSInitializers.invokeInitializersAsync(
+    afterBlazorStartedCallbacks = await JSInitializers.invokeInitializersAsync(
       Object.keys(initializerFiles),
       [candidateOptions, bootConfigResult.bootConfig.extensions]);
   }
