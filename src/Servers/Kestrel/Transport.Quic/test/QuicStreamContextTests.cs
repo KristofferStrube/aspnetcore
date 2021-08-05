@@ -102,6 +102,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests
 
             Logger.LogInformation("Client reading until end of stream.");
             var data = await clientStream.ReadUntilEndAsync().DefaultTimeout();
+            Assert.Equal(testData.Length, data.Length);
             Assert.Equal(testData, data);
 
             var quicConnectionContext = Assert.IsType<QuicConnectionContext>(serverConnection);
